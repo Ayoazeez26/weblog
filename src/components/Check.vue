@@ -1,45 +1,94 @@
 <template>
   <div class="input-container">
-    <h1 class="mb-3">Wejapa Countries</h1>
-    <!-- <div id="post">
-      {{ titles }}
-    </div> -->
+    <h1 class="mb-3">Trending Topics</h1>
+    <div
+      id="post-title"
+      v-for="post in posts"
+      :key="post.key"
+      :value="post.title"
+      :per-page="perPage"
+      :current-page="currentPage"
+    >
+      {{ post.title }}
+    </div>
+    <a @click="prevPage" id="btn-prev" ref="prev">Prev</a>
+    <a @click="nextPage" id="btn-next" ref="next">Next</a>
+    <p>Page: <span id="page"></span></p>
   </div>
 </template>
 
 <script>
-var fetch = require("node-fetch");
+var axios = require('axios');
 
 export default {
   data() {
     return {
-      titles: []
+      posts: [],
+      perPage: 10,
+      currentPage: 1
     };
   },
   mounted () {
-    this.getPost();
-    this.showTitles();
+    axios
+      .get(`http://jsonplaceholder.typicode.com/posts`)
+      .then(response => (this.getPosts(response.data)))
+      .then(this.getPosts());
   },
   methods: {
-    async getPost() {
-      let postResponse = await fetch(`http://jsonplaceholder.typicode.com/posts`);
-      
-      let post = await postResponse.json();
-      post.forEach((element) => {
-        this.titles.push({
+    getPosts(response) {
+      response.forEach((element) => {
+        this.posts.push({
           key: element.id,
           title: element.title
         })
       })
-      // post = this.titles;
-      
     },
-    showTitles() {
-      console.log(this.titles);
+    prevPage() {
+      if (this.currentPage > 1) {
+        this.currentPage--;
+        this.changePage(this.currentPage);
+      }
+    },
+    nextPage() {
+      if (this.currentPage < this.numPages()) {
+        this.currentPage++;
+        this.changePage(this.currentPage);
+      }
+    },
+    numPages() {
+      return Math.ceil(this.posts.length / this.perPage)
+    },
+    changePage(page) {
+      console.log(this.$refs.prev, page);
     }
   },
+  computed: {
+    rows() {
+      return this.posts.length
+    }
+  }
 };
 </script>
 
 <style scoped>
+  .input-container {
+    background-color: #ddd;
+    width: 70%;
+    margin: 0 auto;
+  }
+  #post-title {
+    text-transform: uppercase;
+    height: 50px;
+    background: #fff;
+    margin: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  a {
+    cursor: pointer;
+    display: block;
+    padding: 5px;
+    margin-bottom: 10px;
+  }
 </style>

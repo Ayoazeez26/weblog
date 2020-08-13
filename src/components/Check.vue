@@ -1,19 +1,45 @@
 <template>
+
   <div class="input-container">
     <h1 class="mb-3">Trending Topics</h1>
     <div
       id="post-title"
-      v-for="post in posts"
+      ref="postList"
+      v-for="post in displayedPosts"
       :key="post.key"
       :value="post.title"
       :per-page="perPage"
-      :current-page="currentPage"
     >
-      {{ post.title }}
+    {{ post.title }}
     </div>
-    <a @click="prevPage" id="btn-prev" ref="prev">Prev</a>
-    <a @click="nextPage" id="btn-next" ref="next">Next</a>
-    <p>Page: <span id="page"></span></p>
+    <nav aria-label="Page navigation example">
+            <ul class="pagination">
+                <li class="page-item">
+                    <button
+                      type="button"
+                      class="page-link"
+                      v-if="page != 1"
+                      @click="page--"
+                      >
+                        Previous
+                      </button>
+                </li>
+                <li class="page-item">
+                    <button
+                      type="button"
+                      class="page-link"
+                      v-for="pageNumber in pages.slice(page-1, page+5)"
+                      @click="page = pageNumber"
+                      :key="pageNumber"
+                    >
+                      {{ pageNumber }}
+                    </button>
+                </li>
+                <li class="page-item">
+                    <button type="button" @click="page++" v-if="page < pages.length" class="page-link"> Next </button>
+                </li>
+            </ul>
+        </nav> 
   </div>
 </template>
 
@@ -21,18 +47,20 @@
 var axios = require('axios');
 
 export default {
+  static: {
+  },
   data() {
     return {
       posts: [],
       perPage: 10,
-      currentPage: 1
+      page: 1,
+      pages: []
     };
   },
   mounted () {
     axios
       .get(`http://jsonplaceholder.typicode.com/posts`)
       .then(response => (this.getPosts(response.data)))
-      .then(this.getPosts());
   },
   methods: {
     getPosts(response) {
@@ -43,52 +71,59 @@ export default {
         })
       })
     },
-    prevPage() {
-      if (this.currentPage > 1) {
-        this.currentPage--;
-        this.changePage(this.currentPage);
-      }
-    },
-    nextPage() {
-      if (this.currentPage < this.numPages()) {
-        this.currentPage++;
-        this.changePage(this.currentPage);
-      }
-    },
     numPages() {
-      return Math.ceil(this.posts.length / this.perPage)
+      let numOfPages = Math.ceil(this.posts.length / this.perPage);
+      for (let index = 1; index <= numOfPages; index++) {
+        this.pages.push(index);
+      }
     },
-    changePage(page) {
-      console.log(this.$refs.prev, page);
+    paginate (posts) {
+      let page = this.page;
+      let perPage = this.perPage;
+      let from = (page * perPage) - perPage;
+      let to = (page * perPage);
+      return posts.slice(from, to);
     }
   },
   computed: {
-    rows() {
-      return this.posts.length
+    displayedPosts () {
+      return this.paginate(this.posts);
     }
+  },
+  watch: {
+    posts () {
+      this.numPages();
+    }
+  },
+  created() {
+    this.getPosts();
   }
 };
 </script>
 
 <style scoped>
   .input-container {
-    background-color: #ddd;
     width: 70%;
     margin: 0 auto;
+    margin-top: 60px;
   }
   #post-title {
     text-transform: uppercase;
     height: 50px;
-    background: #fff;
+    background: #ddd;
     margin: 5px;
     display: flex;
     justify-content: center;
     align-items: center;
+    border-radius: 10px;
+    padding: 10px;
   }
-  a {
-    cursor: pointer;
-    display: block;
-    padding: 5px;
-    margin-bottom: 10px;
+  button.page-link {
+    display: inline-block;
+  }
+  button.page-link {
+    font-size: 20px;
+    color: #29b3ed;
+    font-weight: 500;
   }
 </style>

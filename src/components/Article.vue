@@ -29,15 +29,19 @@ export default {
 <style scoped>
 .post-article {
   margin-top: 80px;
+  text-align: left;
+  width: 70%;
+  margin: 0 auto;
 }
 h1 {
   text-align: left;
   width: 70%;
-  
+  text-transform: capitalize;
 }
 p {
-  text-align: left;
-  width: 70%;
 
 }
-</st
+p:first-letter {
+text-transform: capitalize;
+}
+</style>

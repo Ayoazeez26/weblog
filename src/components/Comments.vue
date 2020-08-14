@@ -39,4 +39,12 @@ export default {
     font-size: 18px;
     text-align: left;
   }
+
+  li h3:first-letter {
+    text-transform: capitalize;
+  }
+  
+  .comment-body:first-letter {
+    text-transform: capitalize;
+  }
 </style>

@@ -9,6 +9,7 @@
       :key="post.key"
       :value="post.title"
       :per-page="perPage"
+      @click="showPost"
     >
     {{ post.title }}
     </div>
@@ -60,7 +61,7 @@ export default {
   mounted () {
     axios
       .get(`http://jsonplaceholder.typicode.com/posts`)
-      .then(response => (this.getPosts(response.data)))
+      .then(response => (this.getPosts(response.data)), error => console.log(error))
   },
   methods: {
     getPosts(response) {
@@ -103,7 +104,7 @@ export default {
 
 <style scoped>
   .input-container {
-    width: 70%;
+    width: 60%;
     margin: 0 auto;
     margin-top: 60px;
   }
@@ -117,6 +118,7 @@ export default {
     align-items: center;
     border-radius: 10px;
     padding: 10px;
+    cursor: pointer;
   }
   button.page-link {
     display: inline-block;

@@ -1,7 +1,10 @@
 <template>
   <div id="app">
     <div class="nav">
-      WeBlog
+      <ul>
+        <li>WeBlog</li>
+        <li><router-link :to="'/'">Home</router-link></li>
+      </ul>
     </div>
     <router-view></router-view>
   </div>
@@ -32,5 +35,16 @@
   color: white;
   padding-left: 20px;
   font-size: 24px;
+}
+
+ul {
+  display: flex;
+  justify-content: flex-start;
+}
+
+li {
+  list-style-type: none;
+  color: white;
+  width: 100px;
 }
 </style>

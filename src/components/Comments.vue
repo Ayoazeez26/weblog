@@ -21,7 +21,7 @@ export default {
     }
   },
   mounted() {
-    this.$http.get(`http://jsonplaceholder.typicode.com/posts/${this.$route.params.id}/comments`)
+    this.$http.get(`https://jsonplaceholder.typicode.com/posts/${this.$route.params.id}/comments`)
       .then(response => response.json(), error => console.log(error))
       .then(json => this.comments = json, error => console.log(error));
   }

@@ -59,7 +59,7 @@ export default {
   },
   mounted () {
     axios
-      .get(`http://jsonplaceholder.typicode.com/posts`)
+      .get(`https://jsonplaceholder.typicode.com/posts`)
       .then(response => (this.getPosts(response.data)), error => console.log(error))
   },
   methods: {

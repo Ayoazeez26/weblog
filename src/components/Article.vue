@@ -1,8 +1,7 @@
 <template>
-  <article class="col-sm-12 col-lg-8">
+  <article class="post-article col-sm-12 col-lg-8">
     <h1>{{ post.title }}</h1>
     <p> {{ post.body }}</p>
-
     <Comments />
   </article>
 </template>
@@ -28,11 +27,17 @@ export default {
 </script>
 
 <style scoped>
+.post-article {
+  margin-top: 80px;
+}
 h1 {
   text-align: left;
+  width: 70%;
+  
 }
 p {
   text-align: left;
+  width: 70%;
 
 }
-</style>
+</st

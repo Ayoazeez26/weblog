@@ -7,7 +7,8 @@
         class="list-group-item"
         :key="comment.id"
       >
-        <strong>{{ comment.name }}</strong> <em>wrote:</em> {{ comment.body }}
+        <h3><strong>{{ comment.name }}</strong></h3>
+        <p class="comment-body">{{ comment.body }}</p>
       </li>
     </ul>
   </article>
@@ -27,3 +28,15 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+  li h3 {
+    font-size: 22px;
+    text-align: left;
+  }
+
+  .comment-body {
+    font-size: 18px;
+    text-align: left;
+  }
+</style>

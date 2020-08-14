@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <div class="nav">
-      <ul>
+      <ul class="nav-ul">
         <li>WeBlog</li>
         <li><router-link :to="'/'">Home</router-link></li>
       </ul>
@@ -35,14 +35,15 @@
   color: white;
   padding-left: 20px;
   font-size: 24px;
+  z-index: 99;
 }
 
-ul {
+.nav-ul {
   display: flex;
   justify-content: flex-start;
 }
 
-li {
+.nav-ul li {
   list-style-type: none;
   color: white;
   width: 100px;

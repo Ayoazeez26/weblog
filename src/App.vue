@@ -1,21 +1,14 @@
 <template>
   <div id="app">
-    <Navbar />
-    <Check />
+    <div class="nav">
+      WeBlog
+    </div>
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
-import Navbar from './components/Navbar.vue'
-import Check from './components/Check.vue'
 
-export default {
-  name: 'App',
-  components: {
-    Navbar,
-    Check
-  }
-}
 </script>
 
 <style>
@@ -25,5 +18,19 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+}
+
+.nav {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  background-color: #0B5F73;
+  color: white;
+  padding-left: 20px;
+  font-size: 24px;
 }
 </style>

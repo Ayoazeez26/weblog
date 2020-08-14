@@ -2,17 +2,16 @@
 
   <div class="input-container">
     <h1 class="mb-3">Trending Topics</h1>
-    <div
+    <section
       id="post-title"
       ref="postList"
       v-for="post in displayedPosts"
       :key="post.key"
       :value="post.title"
       :per-page="perPage"
-      @click="showPost"
     >
-    {{ post.title }}
-    </div>
+      <router-link :to="'/posts/' + post.key">{{ post.title }}</router-link>
+    </section>
     <nav aria-label="Page navigation example">
             <ul class="pagination">
                 <li class="page-item">

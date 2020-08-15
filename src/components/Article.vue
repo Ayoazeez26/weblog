@@ -38,16 +38,23 @@ h2 {
   text-transform: capitalize;
 }
 p {
-
+  font-size: 20px;
 }
 p:first-letter {
 text-transform: capitalize;
 }
 
 @media screen and (max-width: 768px) {
+  h2 {
+   font-size: 26px;
+  }
   .post-article {
     width: 100%;
-    margin-top: 20px;
+    margin-top: 40px;
+  }
+  p {
+    line-height: 20px;
+    font-size: 16px;
   }
 }
 </style>

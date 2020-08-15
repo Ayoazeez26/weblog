@@ -1,7 +1,7 @@
 <template>
 
   <div class="input-container">
-    <h1 class="mb-3">Trending Topics</h1>
+    <h1 class="header mb-3">Trending Topics</h1>
       <section
         id="post-title"
         ref="postList"
@@ -11,7 +11,7 @@
         :per-page="perPage"
       >
         <router-link :to="'/posts/' + post.key">
-          {{ post.title }}
+          <h4 id="topicTitle">{{ post.title }}</h4>
         </router-link>
       </section>
     <nav aria-label="Page navigation example">
@@ -109,17 +109,25 @@ export default {
     margin: 0 auto;
     margin-top: 60px;
   }
-  #post-title {
-    text-transform: uppercase;
-    height: 50px;
+  #topicTitle {
+    height: 60px;
     background: #ddd;
     margin: 5px;
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
     border-radius: 10px;
     padding: 10px;
     cursor: pointer;
+    color: #2c3e50;
+    text-decoration: none;
+    font-size: 22px;
+  }
+  #post-title a:first-letter {
+    text-transform: capitalize;
+  }
+  #post-title a:hover {
+    text-decoration: none;
   }
   button.page-link {
     display: inline-block;
@@ -128,5 +136,22 @@ export default {
     font-size: 20px;
     color: #29b3ed;
     font-weight: 500;
+  }
+
+  @media screen and (max-width: 768px) {
+    .header {
+      font-size: 24px;
+      margin-left: 10px;
+      margin-top: 20px;
+    }
+    .input-container {
+      width: 100%;
+    }
+      
+    #topicTitle {
+      height: 70px;
+      margin: 10px;
+      font-size: 18px;
+    }
   }
 </style>

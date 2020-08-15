@@ -1,6 +1,6 @@
 <template>
   <article class="post-article col-sm-12 col-lg-8">
-    <h1>{{ post.title }}</h1>
+    <h2>{{ post.title }}</h2>
     <p> {{ post.body }}</p>
     <Comments />
   </article>
@@ -28,14 +28,13 @@ export default {
 
 <style scoped>
 .post-article {
-  margin-top: 80px;
+  margin-top: 100px;
   text-align: left;
   width: 70%;
   margin: 0 auto;
 }
-h1 {
+h2 {
   text-align: left;
-  width: 70%;
   text-transform: capitalize;
 }
 p {
@@ -43,5 +42,11 @@ p {
 }
 p:first-letter {
 text-transform: capitalize;
+}
+
+@media screen and (max-width: 768px) {
+  .post-article {
+    width: 100%;
+  }
 }
 </style>

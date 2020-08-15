@@ -33,7 +33,6 @@
   justify-content: flex-start;
   background-color: #0B5F73;
   color: white;
-  padding-left: 20px;
   font-size: 24px;
   z-index: 99;
 }

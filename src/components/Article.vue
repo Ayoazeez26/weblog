@@ -28,10 +28,10 @@ export default {
 
 <style scoped>
 .post-article {
-  margin-top: 100px;
   text-align: left;
   width: 70%;
   margin: 0 auto;
+  margin-top: 60px;
 }
 h2 {
   text-align: left;
@@ -47,6 +47,7 @@ text-transform: capitalize;
 @media screen and (max-width: 768px) {
   .post-article {
     width: 100%;
+    margin-top: 20px;
   }
 }
 </style>
